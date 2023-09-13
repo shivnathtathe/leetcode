@@ -1,8 +1,17 @@
-#using collection module
-import collections
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        counter = collections.Counter(nums)
-        for i,j in counter.items():
-            if j > 1:
-                return i
+        slow = nums[0]
+        fast = nums[0]
+        
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
+                break
+        
+        slow = nums[0]
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+        
+        return slow
