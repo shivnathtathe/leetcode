@@ -1,17 +1,21 @@
 class Solution:
     def findRestaurant(self, list1: List[str], list2: List[str]) -> List[str]:
-        common = []
+        common_restaurants = []
+        index_map = {}
+        
+        for i, restaurant in enumerate(list1):
+            index_map[restaurant] = i
+        
         min_sum = float('inf')
+        
+        for j, restaurant in enumerate(list2):
+            if restaurant in index_map:
+                sum_num = j + index_map[restaurant]
+                
+                if sum_num < min_sum:
+                    min_sum = sum_num
+                    common_restaurants = [restaurant]
+                elif sum_num == min_sum:
+                    common_restaurants.append(restaurant)
 
-        for i in range(len(list1)):
-            for j in range(len(list2)):
-                if list1[i] == list2[j]:
-                    sum_num = i + j
-
-                    if sum_num < min_sum:
-                        min_sum = sum_num
-                        common = [list1[i]]
-                    elif sum_num == min_sum:
-                        common.append(list1[i])
-
-        return common
+        return common_restaurants
