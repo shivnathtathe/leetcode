@@ -5,7 +5,7 @@ class Solution:
         if len(points) <= 2:
             return len(points)
 
-        max_points = 2  # At least two points will always be on the same line
+        max_points = 2  
 
         for i in range(len(points)):
             slope_count = defaultdict(int)
